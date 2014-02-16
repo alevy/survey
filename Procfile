@@ -1,1 +1,1 @@
-web: bundle exec thin start -S $SOCKET
+web: bundle exec ./start
