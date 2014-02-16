@@ -1,28 +1,88 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Survey</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>  Survey page | Allumia Energy</title>
+<style>
+  form label {
+    display: block;
+  }
+</style>
 </head>
 <body>
-  <h1>Survey</h1>
-  
-  <div id="content">
-    <form action="/filter" method="GET" id="filter_form">
-      <section id="topics"></section>
-      <input type="submit" value="Preview">
-      <input type="button" id="json" value="JSON" />
-      <input type="button" id="csv" value="CSV" />
-    </form>
-
-    <hr/>
-
-    <table id="preview">
-    </table>
-  </div>
-
-  <script src="/js/jquery.js"></script>
-  <script src="/js/application.js"></script>
+  <form method="post" enctype="multipart/form-data" action="http://localhost:5000/submit">
+    <fieldset>
+      <p>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" />
+      </p>
+      <p>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" />
+      </p>
+      <p>
+        <label for="company">Company Name</label>
+        <input type="text" id="company" name="company" />
+      </p>
+      <p>
+        <label for="position">Position</label>
+        <input type="text" id="position" name="position" />
+      </p>
+      <p>
+        <label for="personal">Tell us a bit about yourself</label>
+        <textarea id="personal" name="personal"></textarea>
+      </p>
+      <p>
+        <div id="topics">
+          <label for="topics">
+            What sorts of topics are you interested in discussing with other HUB
+            members?
+          </label>
+          <select name="topics[]">
+            <option></option>
+            <option value="Energy">Energy</option>
+            <option value="Finance">Finance</option>
+            <option value="Clean Tech">Clean Tech</option>
+            <option value="Sustainability">Sustainability</option>
+            <option value="Art">Art</option>
+            <option value="Social Justice">Social Justice</option>
+            <option value="Coworking">Coworking</option>
+            <option value="Education">Education</option>
+            <option value="Languages">Languages</option>
+          </select>
+        </div>
+        <br/>
+        <a href="#" id="add_topic">add topic</a>
+      </p>
+      <p>
+        <label for="free">I&#039;m usually free for</label>
+        <select name="free" id="free">
+          <option value="Breakfast">Breakfast</option>
+          <option value="Coffee">Coffee</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Happy Hour">Happy Hour</option>
+          <option value="All of the above">All of the above</option>
+        </select>
+      </p>
+      <p>
+        <label for="photo" id="photo">
+          Photo: Let us see what you look like.
+        </label>
+        <input type="file" name="photo" id="photo" class="{accept:'png|jpe?g|gif'}" />
+        </p>
+    </fieldset>
+    <input type="submit" value="Submit" />
+  </form>
+  <script>
+    var a = document.getElementById('add_topic');
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var topics = document.getElementById('topics');
+      var newlist = topics.getElementsByTagName('select')[0].cloneNode(true);
+      var br = document.createElement('br');
+      topics.appendChild(br);
+      topics.appendChild(newlist);
+    });
+  </script>
 </body>
 </html>

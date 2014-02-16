@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Survey</title>
+</head>
+<body>
+  <h1>Survey</h1>
+  
+  <div id="content">
+    <form action="/filter" method="GET" id="filter_form">
+      <section id="topics"></section>
+      <input type="submit" value="Preview">
+      <input type="button" id="json" value="JSON" />
+      <input type="button" id="csv" value="CSV" />
+    </form>
+
+    <hr/>
+
+    <table id="preview">
+    </table>
+  </div>
+
+  <script src="/js/jquery.js"></script>
+  <script src="/js/application.js"></script>
+</body>
+</html>
