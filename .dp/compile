@@ -1,2 +1,7 @@
 # Place compilation commands here
 bundle install
+
+rm -Rf data
+rm -Rf public/photos
+ln -s ../../data data
+ln -s ../../photos photos
