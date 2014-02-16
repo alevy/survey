@@ -6,7 +6,7 @@ get '/fields' do
   content_type 'application/json'
   data = Dir.glob('data/*').map! do |filepath|
     JSON.parse(File.read(filepath)).keys
-  end.flatten!.uniq!.to_json
+  end.flatten.uniq.to_json
 end
 
 get '/filter.?:format?' do
