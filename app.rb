@@ -61,6 +61,7 @@ post '/submit' do
                         submission_id + File.extname(photo[:filename]))
     FileUtils.mv(photo[:tempfile].path,
                  File.join('public', newpath))
+    FileUtils.chmod(0644, File.join('public', newpath))
     data['photo'] = newpath
   end
   File.open(File.join('data', submission_id + '.json'), "w") do |file|
