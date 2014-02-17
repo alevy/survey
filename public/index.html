@@ -10,7 +10,8 @@
 </style>
 </head>
 <body>
-  <form method="post" enctype="multipart/form-data" action="http://localhost:5000/submit">
+  <form method="post" enctype="multipart/form-data" action="/submit">
+    <input type="hidden" name="return_to" value="/thanks.html"/>
     <fieldset>
       <p>
         <label for="name">Name</label>

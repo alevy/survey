@@ -2,7 +2,22 @@ require 'sinatra'
 require 'json'
 require 'csv'
 
+helpers do
+  def protected!
+    return if authorized?
+    headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+    halt 401, "Not authorized\n"
+  end
+
+  def authorized?
+    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+    @auth.provided? and @auth.basic? and @auth.credentials and
+      @auth.credentials == [ENV["ADMIN_USERNAME"], ENV["ADMIN_PASSWORD"]]
+  end
+end
+
 get '/fields' do
+  protected!
   content_type 'application/json'
   data = Dir.glob('data/*').map! do |filepath|
     JSON.parse(File.read(filepath)).keys
@@ -10,6 +25,7 @@ get '/fields' do
 end
 
 get '/filter.?:format?' do
+  protected!
   whitelist_keys = params['fields']
   data = []
   if whitelist_keys
@@ -48,5 +64,5 @@ post '/submit' do
   File.open(File.join('data', submission_id + '.json'), "w") do |file|
     file.write(data.to_json)
   end
-  redirect_to return_to
+  redirect to(return_to)
 end
