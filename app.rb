@@ -56,7 +56,7 @@ post '/submit' do
   submission_id = SecureRandom.uuid
   data = params.select {|k,v| not v.empty? }
   return_to = data.delete("return_to")
-  if photo = data[:photo]
+  if photo = data["photo"]
     newpath = File.join('photos', submission_id)
     FileUtils.mv(photo[:tempfile].path, File.join('public', newpath))
     data['photo'] = newpath
