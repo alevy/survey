@@ -35,7 +35,7 @@ $(function() {
           var item = data[i];
           for (var k in item) {
             if (k == 'photo') {
-              var img = $('<td><img src="' + item[k] + '" height="64"></td>');
+              var img = $('<td><img src="/' + item[k] + '" height="64"></td>');
               tr.append(img);
             } else {
               var elm = $("<td>" + item[k] + "</td>");
